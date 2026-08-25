@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mind Link | Your Safe Space</title>
+    <meta name="description" content="A mental health assistant and peer-to-peer chat for youth.">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <!-- Phosphor Icons -->
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="app">
+        <!-- Loader -->
+        <div id="loader" class="screen flex-center">
+            <div class="spinner"></div>
+        </div>
+
+        <!-- Landing Page -->
+        <div id="landing-page" class="screen hidden">
+            <div class="glass-panel landing-content">
+                <div class="logo-container">
+                    <i class="ph ph-brain logo-icon"></i>
+                    <h1>Mind Link</h1>
+                </div>
+                <p class="tagline">Your safe space for mental health support. Chat with our AI therapist or connect with strangers, fear-free and judgment-free.</p>
+                <button id="google-login-btn" class="primary-btn">
+                    <i class="ph-fill ph-google-logo"></i>
+                    Sign in with Google
+                </button>
+            </div>
+            <!-- Background Elements -->
+            <div class="bg-shape shape-1"></div>
+            <div class="bg-shape shape-2"></div>
+            <div class="bg-shape shape-3"></div>
+        </div>
+
+        <!-- Dashboard Page -->
+        <div id="dashboard-page" class="screen hidden">
+            <header class="top-nav">
+                <div class="logo-small">
+                    <i class="ph ph-brain"></i> Mind Link
+                </div>
+                <div class="user-profile">
+                    <img id="user-avatar" src="" alt="Avatar">
+                    <button id="logout-btn" class="icon-btn"><i class="ph ph-sign-out"></i></button>
+                </div>
+            </header>
+            
+            <main class="dashboard-main">
+                <h2 class="welcome-text">Hi, <span id="user-firstname">there</span></h2>
+                <p class="subtitle">How are you feeling today?</p>
+                
+                <div class="dashboard-options">
+                    <div class="option-card" id="card-ai">
+                        <div class="card-icon"><i class="ph-fill ph-robot"></i></div>
+                        <h3>AI Therapist</h3>
+                        <p>Talk to our intelligent assistant for mental health diagnosis and support.</p>
+                    </div>
+                    <div class="option-card" id="card-stranger">
+                        <div class="card-icon"><i class="ph-fill ph-users-three"></i></div>
+                        <h3>Peer Chat</h3>
+                        <p>Connect randomly with others. No judgment, just real conversations.</p>
+                    </div>
+                </div>
+            </main>
+            <div class="bg-shape shape-1"></div>
+            <div class="bg-shape shape-4"></div>
+        </div>
+
+        <!-- AI Chat Page -->
+        <div id="ai-chat-page" class="screen hidden chat-screen">
+            <header class="chat-header glass-header">
+                <button class="back-btn icon-btn" onclick="app.showScreen('dashboard-page')"><i class="ph ph-caret-left"></i></button>
+                <div class="chat-title">
+                    <div class="avatar ai-avatar"><i class="ph ph-robot"></i></div>
+                    <div>
+                        <h3>AI Therapist</h3>
+                        <span class="status online">Online</span>
+                    </div>
+                </div>
+                <div class="header-actions">
+                    <button id="therapist-call-btn" class="danger-btn hidden">
+                        <i class="ph-fill ph-phone-call"></i> Call Therapist
+                    </button>
+                </div>
+            </header>
+            
+            <main class="chat-area" id="ai-messages">
+                <div class="message ai-msg">
+                    <div class="msg-content">Hello! I'm your Mind Link assistant. I'm here to listen and help. How are you doing today?</div>
+                </div>
+            </main>
+            
+            <footer class="chat-input-area">
+                <div class="input-glass">
+                    <input type="text" id="ai-input" placeholder="Type your message here..." autocomplete="off">
+                    <button id="ai-send-btn" class="send-btn"><i class="ph-fill ph-paper-plane-right"></i></button>
+                </div>
+            </footer>
+        </div>
+
+        <!-- Stranger Chat Page -->
+        <div id="stranger-chat-page" class="screen hidden chat-screen">
+            <header class="chat-header glass-header">
+                <button class="back-btn icon-btn" onclick="app.leaveStrangerChat()"><i class="ph ph-caret-left"></i></button>
+                <div class="chat-title">
+                    <div class="avatar stranger-avatar"><i class="ph ph-user-focus"></i></div>
+                    <div>
+                        <h3 id="stranger-chat-status">Searching for someone...</h3>
+                        <span class="status" id="stranger-status-dot"></span>
+                    </div>
+                </div>
+                <div class="header-actions">
+                    <button id="next-stranger-btn" class="secondary-btn">
+                        <i class="ph ph-skip-forward"></i> Next
+                    </button>
+                </div>
+            </header>
+            
+            <main class="chat-area" id="stranger-messages">
+                <!-- Messages will appear here -->
+            </main>
+            
+            <footer class="chat-input-area">
+                <div class="input-glass">
+                    <input type="text" id="stranger-input" placeholder="Say hello..." autocomplete="off" disabled>
+                    <button id="stranger-send-btn" class="send-btn" disabled><i class="ph-fill ph-paper-plane-right"></i></button>
+                </div>
+            </footer>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <!-- Firebase is imported as modules in js/firebase.js -->
+    <script type="module" src="js/firebase.js"></script>
+    <script type="module" src="js/ai.js"></script>
+    <script type="module" src="js/chat.js"></script>
+    <script type="module" src="js/app.js"></script>
+</body>
+</html>
